@@ -50,7 +50,10 @@ class Contenedor {
       if (itemRemoved) {
         const index = datos.indexOf(itemRemoved);
         datos.splice(index, 1);
-        await fs.promises.writeFile(this.nameItem, JSON.stringify(datos));
+        await fs.promises.writeFile(
+          this.nameItem,
+          JSON.stringify(datos, null, 2)
+        );
       } else {
         console.log(`ID ${id} does not exist in the file`);
         return null;
@@ -70,7 +73,10 @@ class Contenedor {
       item.id = datos.length + 1;
       datos.push(item);
 
-      await fs.promises.writeFile(this.nameItem, JSON.stringify(datos));
+      await fs.promises.writeFile(
+        this.nameItem,
+        JSON.stringify(datos, null, 2)
+      );
       return item.id;
     } catch (error) {
       console.log(
