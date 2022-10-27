@@ -1,0 +1,37 @@
+[
+   {
+      "title": "Heineken",
+      "price": 350,
+      "thumbnail": "https://ardiaprod.vtexassets.com/arquivos/ids/214736-800-auto?v=637713689410730000&width=800&height=auto&aspect=true",
+      "id": 1
+   },
+   {
+      "title": "Temple",
+      "price": 400,
+      "thumbnail": "https://www.proveeduriapiaf.com.ar/wp-content/uploads/scottish-temple.jpg",
+      "id": 2
+   },
+   {
+      "title": "Brahama",
+      "price": 200,
+      "thumbnail": "https://ardiaprod.vtexassets.com/arquivos/ids/192108-800-auto?v=637506170079900000&width=800&height=auto&aspect=true",
+      "id": 3
+   },
+   {
+      "title": "Coca",
+      "price": 300,
+      "thumbnail": "https://ardiaprod.vtexassets.com/arquivos/ids/192108-800-auto?v=637506170079900000&width=800&height=auto&aspect=true",
+      "id": 4
+   },
+   {
+      "title": "pepsi",
+      "price": 300,
+      "thumbnail": "https://ardiaprod.vtexassets.com/arquivos/ids/192108-800-auto?v=637506170079900000&width=800&height=auto&aspect=true",
+      "id": 5
+   },
+   {
+      "name": "cerveza",
+      "price": "200",
+      "id": 6
+   }
+]
