@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+    head
+       include partials/head.pug
+       block content
+    body
+        .container 
+            header 
+                include partials/header.pug
+                block content 
+            main
+                .jumbotron 
+                    h1 Curso Backend 
+                    h2=title 
+                div 
+                    h4 Curso Backend        
+                    p=content 
+            include partials/footer.pug
+            block content
+    
