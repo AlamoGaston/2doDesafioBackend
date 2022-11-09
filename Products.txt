@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Cerveza golden",
+    "price": "200",
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_922872-MLA51092790194_082022-O.webp",
+    "id": 1
+  },
+  {
+    "title": "Cerveza negra",
+    "price": "300",
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_692372-MLA44839762837_022021-O.webp",
+    "id": 2
+  },
+  {
+    "title": "Vino",
+    "price": "600",
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_923118-MLA43950731882_102020-O.webp",
+    "id": 3
+  },
+  {
+    "title": "Champagne",
+    "price": "1500",
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_971339-MLA31120154356_062019-O.webp",
+    "id": 4
+  }
+]

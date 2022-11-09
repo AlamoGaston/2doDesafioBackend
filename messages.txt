@@ -1,0 +1,38 @@
+[
+  {
+    "text": "Hola!",
+    "time": "18:5",
+    "user": {
+      "id": "MkeU-KPTikAdsbshAAAJ",
+      "userName": "Franco@hotmail.es",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/456/456141.png"
+    }
+  },
+  {
+    "text": "Todo bien?",
+    "time": "18:6",
+    "user": {
+      "id": "ZETPB4dN6eY0dzd4AAAN",
+      "userName": "Tomas@gmail.com",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/456/456141.png"
+    }
+  },
+  {
+    "text": "hola",
+    "time": "23:26",
+    "user": {
+      "id": "iZHPnYX57ePxEpq2AAAF",
+      "userName": "Gaston@live",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/456/456141.png"
+    }
+  },
+  {
+    "text": "todo bien",
+    "time": "11:52",
+    "user": {
+      "id": "ipYhRswVtpkr-zg6AAAF",
+      "userName": "gaston@live",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/456/456141.png"
+    }
+  }
+]
