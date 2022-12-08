@@ -1,0 +1,105 @@
+[
+  {
+    "name": "Cerveza golden",
+    "description": "",
+    "code": "código",
+    "price": "200",
+    "pic": "https://http2.mlstatic.com/D_NQ_NP_922872-MLA51092790194_082022-O.webp",
+    "stock": 10,
+    "id": 1,
+    "timestamp": 1656957169489
+  },
+  {
+    "name": "Cerveza negra",
+    "description": "",
+    "code": "código",
+    "price": "300",
+    "pic": "https://http2.mlstatic.com/D_NQ_NP_692372-MLA44839762837_022021-O.webp",
+    "stock": 10,
+    "id": 2,
+    "timestamp": 1656957169489
+  },
+  {
+    "name": "Vino",
+    "description": "",
+    "code": "código",
+    "price": "600",
+    "pic": "https://http2.mlstatic.com/D_NQ_NP_923118-MLA43950731882_102020-O.webp",
+    "stock": 10,
+    "id": 3,
+    "timestamp": 1656957169489
+  },
+  {
+    "name": "Champagne",
+    "description": "",
+    "code": "código",
+    "price": "1500",
+    "pic": "https://http2.mlstatic.com/D_NQ_NP_971339-MLA31120154356_062019-O.webp",
+    "stock": 10,
+    "id": 4,
+    "timestamp": 1656957169489
+  },
+  {
+    "name": "Coca",
+    "description": "",
+    "code": "código",
+    "price": "350",
+    "stock": 10,
+    "id": 5,
+    "timestamp": 1668377242094
+  },
+  {
+    "id": 6,
+    "timestamp": 1668451421953
+  },
+  {
+    "id": 7,
+    "timestamp": 1668451435012
+  },
+  {
+    "id": 8,
+    "timestamp": 1668451743248
+  },
+  {
+    "id": 9,
+    "timestamp": 1668451768221
+  },
+  {
+    "id": 10,
+    "timestamp": 1668451877573
+  },
+  {
+    "id": 11,
+    "timestamp": 1668451900246
+  },
+  {
+    "id": 12,
+    "timestamp": 1668451920333
+  },
+  {
+    "id": 13,
+    "timestamp": 1668452295316
+  },
+  {
+    "id": 14,
+    "timestamp": 1668452446803
+  },
+  {
+    "name": "Coca",
+    "description": "",
+    "code": "código",
+    "price": "350",
+    "stock": 10,
+    "id": 15,
+    "timestamp": 1668452551994
+  },
+  {
+    "name": "Coca",
+    "description": "",
+    "code": "código",
+    "price": "350",
+    "stock": 10,
+    "id": 16,
+    "timestamp": 1668452568340
+  }
+]
