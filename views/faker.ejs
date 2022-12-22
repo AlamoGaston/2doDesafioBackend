@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include(`./partials/head`) %>
+  </head>
+
+  <body>
+    <div class="container">
+      <header><%- include('./partials/header', {current: `faker`}) %></header>
+      <main>
+        <div class="jumbotron">
+          <h2 class="fw-bold mb-2 text-uppercase">Datos con Faker</h2>
+          <p>Datos aleatorios utilizando la librería Faker</p>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Photo</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyProducts">
+            <% dataRandom.forEach((product)=> { %>
+            <tr>
+              <td><%= product.nombre%></td>
+
+              <td><%= product.precio%></td>
+
+              <td>
+                <img width="50" height="50" src="<%= product.foto %>" />
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </main>
+    </div>
+  </body>
+</html>
