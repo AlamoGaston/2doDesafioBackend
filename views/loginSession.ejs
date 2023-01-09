@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loggin session</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <header><%- include('./partials/header', {current: `login`}) %></header>
+      <main>
+
+        <div class="jumbotron">
+          <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+
+          <form method="GET" action=/api/productos-test>
+              
+              <p>Usuario</p>
+              <div class="form-group">
+                <label for="nameLogin">Ingrese su nombre</label>
+                <input id="nameLogin" class="form-control" type="text" name="nameLogin" required>
+              </div>
+
+              <button class="btn btn-primary" type="submit">Login</button>
+          </form>
+      </div>
+
+      </main>
+
+      <footer><%- include('./partials/footer') %></footer>
+    </div>
+  </body>
+</html>
