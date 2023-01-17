@@ -7,7 +7,7 @@
 
 ## Scripts
 
-#### Backend: `nodemon server.js`
+#### Backend: `npm run start:dev`
 Run the application locally
 [http://localhost:8080/](http://localhost:8080/)
 
@@ -26,17 +26,17 @@ Run the application locally
 > [Node Js](https://www.coderhouse.com.uy/online/programacion-backend)
 
 ## Teach & tutor
-> <p>Group: 30975.</p>
-> <p>Teach: Iram Gutierrez</p>
-> <p>Tutor: Gonzalo Moure.</p> 
+> <p>Group: 32165.</p>
+> <p>Teach: Pablo Dominguez </p>
+> <p>Tutor: Rodrigo Maestre.</p> 
 
 ## Author
-> <p>Gastón Barlocco. </p>
-> <p>Email: barlocco@hotmail.es </p>
+> <p>Gastón Alamo </p>
+> <p>Email: alamolionel@live.com.ar </p>
 
 
 ---
 <p align='center'>
 &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://www.linkedin.com/in/gastón-barlocco-315756148/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+  <a href="https://www.linkedin.com/in/gaston-alamo-44b450212/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
 </p>
