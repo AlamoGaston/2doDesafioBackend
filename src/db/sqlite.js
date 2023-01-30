@@ -1,9 +1,11 @@
 const path = require("path");
+const dotenv = require(`dotenv`);
+dotenv.config();
 
 const optionsSQLite3 = {
-  client: "sqlite3",
+  client: process.env.CLIENT_SQLITE3,
   connection: {
-    filename: path.resolve(__dirname, "../sqlite/db.sqlite"),
+    filename: path.resolve(__dirname, process.env.FILNMAE_SQLITE3),
   },
   useNullAsDefault: true,
 };

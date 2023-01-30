@@ -1,5 +1,4 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
@@ -8,11 +7,9 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const MessageDAOMongoDB = require("./daos/MessageDAOMongoDB");
 
-const faker = require(`faker`);
+const faker = require("faker");
 
 const util = require("util");
-const normalizr = require("normalizr");
-const { normalize, denormalize, schema } = require("normalizr");
 
 const MongoStore = require(`connect-mongo`);
 
@@ -29,12 +26,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger("tiny"));
 
-const COOKIES_SECRET = process.env.COOKIES_SECRET || "123456";
-
-app.use(cookieParser(COOKIES_SECRET));
-
 app.set("views", "./views");
 app.set("view engine", "ejs");
+
+//------------------------------------- args ----------------------------------------//
+
+// const args = parseArgs(process.argv.slice(2));
+
+// const PORT = args.p || 8080;
+// httpServer.listen(PORT, () => console.log(`Servidor escuchando el puerto ${PORT}`));
+
+//------------------------------------- args ----------------------------------------//
 
 let users = [];
 
@@ -63,76 +65,216 @@ app.use("/login", loginRouterPost);
 //Instancia contenedores:
 const storageMessages = new MessageDAOMongoDB();
 
-//-------------------------------- Desafio 12 ----------------------------------------//
 const router = Router();
+
+// ----------------------------------- Desafio 13 ----------------------------
+const flash = require("connect-flash");
+
+const { createHash, isValidPassword } = require("./src/utils/utils");
+
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+
+const UserModel = require("./src/db/models/user");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const mongoConfig = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 
-const storeConfig = {
-  mongoUrl:
-    "mongodb+srv://alamolionel:Maverick.30@maverick.46h8w90.mongodb.net/session?retryWrites=true&w=majority",
-  mongoOptions: mongoConfig,
-};
-
 app.use(
   session({
-    store: MongoStore.create(storeConfig),
-    secret: COOKIES_SECRET,
+    store: MongoStore.create({
+      mongoUrl: "mongodb://0.0.0.0:27017/desafio13",
+      ttl: 10,
+      mongoConfig,
+    }),
+    secret: "123456",
     resave: true,
     saveUninitialized: true,
+    cookie: { maxAge: 600000 },
   })
 );
 
-app.use("/", router);
+app.use(flash());
 
-router.get("/loginSession", (req, res) => {
-  res.render("loginSession");
-  req.session.destroy((err) => {
-    if (!err) {
-      console.log("ok");
-    } else {
-      console.log("error");
+app.use(passport.initialize());
+app.use(passport.session());
+
+/*
+    strategySignup:
+    passport por defecto toma el username & password de req.body.username, req.body.password,
+    en nuestro modelo para ingresar a la DB tenemos también email, entonces, para obtener el
+    email indicamos que queremos recibir todo el req.
+*/
+
+passport.use(
+  "login",
+  new LocalStrategy(
+    {
+      //Configuración para obtener todo el req.
+      passReqToCallback: true,
+    },
+    async (_req, username, password, done) => {
+      try {
+        const user = await UserModel.findOne({ username });
+        if (!user) {
+          return done(null, false);
+        }
+        if (!isValidPassword(user.password, password)) {
+          return done(null, false);
+        }
+        return done(null, user);
+      } catch (err) {
+        done(err);
+      }
     }
-  });
+  )
+);
+
+passport.use(
+  "signup",
+  new LocalStrategy(
+    {
+      //Configuración para obtener todo el req.
+      passReqToCallback: true,
+    },
+    async (req, username, password, done) => {
+      try {
+        const user = await UserModel.findOne({ username });
+        if (user) {
+          return done(null, false);
+        }
+
+        const newUser = new UserModel();
+        newUser.username = username;
+        newUser.password = createHash(password); //No se puede volver a conocer la contraseña luego de realizarle el hash
+        newUser.email = req.body.email;
+
+        const userSave = await newUser.save();
+
+        return done(null, userSave);
+      } catch (err) {
+        done(err);
+      }
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  console.log("serializeUser");
+  done(null, user._id);
 });
 
-router.get("/api/productos-test", (req, res) => {
-  const user = req.query.nameLogin;
+passport.deserializeUser(async (id, done) => {
+  console.log("deserializeUser");
+  try {
+    const user = await UserModel.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
 
-  req.session.usuario = user;
+app.get("/login2", (req, res) => {
+  return res.render("loginSession");
+});
 
-  const dataRandom = [];
-  const data = {
-    dataRandom: dataRandom,
-    nameLogin: req.session.usuario,
-  };
+app.get("/signup2", (req, res) => {
+  return res.render("signup");
+});
 
-  for (let i = 0; i < 5; i++) {
-    dataRandom.push({
-      nombre: faker.commerce.productName(),
-      precio: faker.commerce.price(),
-      foto: faker.image.image(),
+app.get("/bienvenida", (req, res) => {
+  userLog = req.user.username;
+  res.render("bienvenida", { userLog });
+});
+
+app.get("/errorLog", (req, res) => {
+  res.render("errorLog");
+});
+
+app.get("/errorSignup", (req, res) => {
+  res.render("errorSignup");
+});
+
+app.get("/logout", (req, res) => {
+  if (req.user) {
+    userLogout = req.user.username;
+    res.render("logout", { userLogout });
+    req.session.destroy((err) => {
+      if (!err) {
+        console.log("ok");
+      } else {
+        console.log("error");
+      }
     });
   }
-  res.render("faker", data);
+  res.render("errorLog");
 });
 
-router.get("/logout", (req, res) => {
-  userLogout = req.session.usuario;
-  res.render("logout", { userLogout });
-  req.session.destroy((err) => {
-    if (!err) {
-      console.log("ok");
-    } else {
-      console.log("error");
-    }
+app.post(
+  "/login2",
+  passport.authenticate("login", {
+    //indicamos el controlador de passport, llega desde el formulario de login.
+    successRedirect: "/bienvenida", //redirect es con método get, vamos a home.
+    failureRedirect: `/errorLog`, // redirect es con método get, vamos a /login de get.
+    failureFlash: true, // nos permite enviar mensajes.
+  })
+);
+
+app.post(
+  "/signup2",
+  passport.authenticate("signup", {
+    //indicamos el controlador de passport, llega desde el formulario de signup.
+    successRedirect: "/", // redirect es con método get, vamos a home.
+    failureRedirect: "/errorSignup", // redirect es con método get, vamos a /signup de signup.
+    failureFlash: true, // nos permite enviar mensajes.
+  })
+);
+
+//-------------------------------- Desafio 13 ----------------------------------------//
+
+//-------------------------------- Desafio 14 ----------------------------------------//
+
+const dotenv = require("dotenv");
+require("dotenv").config();
+
+const { fork } = require("child_process");
+
+app.get("/info", (_req, res) => {
+  const data = {
+    directActual: process.cwd(),
+    idProcess: process.pid,
+    versionNode: process.version,
+    routeEjec: process.execPath,
+    opSys: process.platform,
+    memory: JSON.stringify(process.memoryUsage().rss, null, 2),
+  };
+  res.render("info", data);
+});
+
+app.get("/api/randoms", (_req, res) => {
+  res.render("objectRandomIN");
+});
+
+app.post("/api/randoms", (req, res) => {
+  const { cantBucle } = req.body;
+  process.env.CANT_BUCLE = cantBucle;
+
+  const objectRandom = fork("./controller/getObjectRandom");
+  objectRandom.on("message", (dataRandom) => {
+    return res.send(dataRandom);
   });
 });
 
-//-------------------------------- Desafio 12 ----------------------------------------//
+app.get("/objectRandomOut", (_req, res) => {
+  res.render("onjectRandomOUT");
+});
+
+//-------------------------------- Desafio 14 ----------------------------------------//
 
 //socket Products
 io.on("connection", (socket) => {
@@ -166,17 +308,17 @@ io.on("connection", (socket) => {
 });
 
 //socket chat
-io.on("connection", (socket) => {
+io.on("connection", (socket, res) => {
   //Cliente --> Servidor: joinChat event
-  socket.on("joinChat", async ({ userName }) => {
+  socket.on("joinChat", async ({ aliasName }) => {
     users.push({
       id: socket.id,
-      userName: userName,
+      aliasName: aliasName,
       avatar: "https://cdn-icons-png.flaticon.com/512/456/456141.png",
     });
 
     //Servidor --> Cliente : bienvenida al usuario que se conecta.
-    socket.emit("notification", `Bienvenido ${userName}`);
+    socket.emit("notification", `Bienvenido ${aliasName}`);
 
     try {
       //const allMessageFromDB = await selectAllMessage();
@@ -278,9 +420,6 @@ io.on("connection", (socket) => {
         ],
       };
 
-      // Se tendrìa que leer de la DB y enviar a la funcionar normalizar dicha información.
-      normalizar(dataJson);
-
       //Servidor --> Cliente : Se envian todos los mensajes al usuario que se conectó.
       socket.emit("allMenssage", allMessageFromDB);
     } catch (err) {
@@ -288,7 +427,7 @@ io.on("connection", (socket) => {
     }
 
     //Servidor --> Cliente : bienvenida a todos los usuarios menos al que inicio la conexión:
-    socket.broadcast.emit("notification", `${userName} se ha unido al chat`);
+    socket.broadcast.emit("notification", `${aliasName} se ha unido al chat`);
 
     //Servidor --> cliente: enviamos a todos los usuarios la lista actualizada de participantes:
     io.sockets.emit("users", users);
@@ -299,9 +438,9 @@ io.on("connection", (socket) => {
     const user = users.find((user) => user.id === socket.id);
 
     const newMessage = {
-      id: user.userName,
+      id: user.aliasName,
       author: {
-        id: user.userName,
+        id: user.aliasName,
         nombre: "Hard-code: Nombre del usuario",
         apellido: "Hard-code: Apellido del usuario",
         edad: "Hard-code: Edad",
@@ -320,8 +459,6 @@ io.on("connection", (socket) => {
     socket.emit("message", newMessage);
 
     socket.broadcast.emit("message", newMessage);
-
-    //await insertMessage(newMessage);
   });
 
   // Cliente --> Servidor: un cliente se desconecta.
@@ -332,57 +469,12 @@ io.on("connection", (socket) => {
     if (user) {
       socket.broadcast.emit(
         "notification",
-        `${user.userName} se ha ido del chat`
+        `${user.aliasName} se ha ido del chat`
       );
     }
 
     io.sockets.emit("users", users);
   });
 });
-
-const print = (objeto) => {
-  console.log(util.inspect(objeto, false, 12, true));
-};
-
-const normalizar = (inMessage) => {
-  const authorSchema = new normalizr.schema.Entity("author");
-
-  const textSchema = new normalizr.schema.Entity("text");
-
-  const mensajeSchema = new normalizr.schema.Entity("mensaje", {
-    author: authorSchema,
-    mensaje: textSchema,
-  });
-
-  constchatSchema = new normalizr.schema.Entity("chat", {
-    mensajes: [mensajeSchema],
-  });
-
-  const normalizedChat = normalizr.normalize(inMessage, constchatSchema);
-  const denormalizedChat = normalizr.denormalize(
-    normalizedChat.result,
-    constchatSchema,
-    normalizedChat.entities
-  );
-
-  console.log("==== OBJETO ORIGINAL ====");
-  console.log(`Tamaño [bytes]: ${JSON.stringify(inMessage).length}`);
-  print(inMessage);
-
-  console.log("==== OBJETO NORMALIZADO ====");
-  console.log(`Tamaño [bytes]: ${JSON.stringify(normalizedChat).length}`);
-  print(normalizedChat);
-
-  console.log("==== OBJETO DENORMALIZADO ====");
-  console.log(`Tamaño [bytes]: ${JSON.stringify(denormalizedChat).length}`);
-  print(denormalizedChat);
-
-  const poPercent = Math.floor(
-    (JSON.stringify(normalizedChat).length * 100) /
-      JSON.stringify(denormalizedChat).length
-  );
-
-  console.log(`Porcentaje de compresion: ${100 - poPercent}%`);
-};
 
 module.exports = httpServer;

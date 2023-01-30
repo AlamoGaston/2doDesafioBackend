@@ -1,27 +1,27 @@
 const socket = io();
 
-const spanServerMessage = document.getElementById(`serverNotification`);
-const usersList = document.getElementById(`usersList`);
-const sendMessage = document.getElementById(`sendMessage`);
-const messageInput = document.getElementById(`messageInput`);
+const spanServerMessage = document.getElementById("serverNotification");
+const usersList = document.getElementById("usersList");
+const sendMessage = document.getElementById("sendMessage");
+const messageInput = document.getElementById("messageInput");
 const messagesContainer = document.getElementById("messagesContainer");
 
-// Obtenemos el nombre de usario de los query params: ?userName=nombreIngresado
-const { userName } = Qs.parse(window.location.search, {
+// Obtenemos el nombre de usario de los query params: ?aliasName=nombreIngresado
+const { aliasName } = Qs.parse(window.location.search, {
   ignoreQueryPrefix: true,
 });
 
 //Cliente --> Servidor: el cliente le envía al servidor el nombre del usuario.
-socket.emit(`joinChat`, { userName });
+socket.emit("joinChat", { aliasName });
 
 //Servidor --> Cliente: El servidor envía notificación.
-socket.on(`notification`, (data) => {
+socket.on("notification", (data) => {
   spanServerMessage.innerHTML = data;
 });
 
 //Servidor --> Cliente: El servidor envía todos los mensajes al usuario que se conecta.
-socket.on(`allMenssage`, (data) => {
-  console.log(`Estoy desde el sevidor: mensajes recibidos:`);
+socket.on("allMenssage", (data) => {
+  console.log("Estoy desde el sevidor: mensajes recibidos:");
   console.log(data);
 
   const message = "";
@@ -39,21 +39,21 @@ socket.on(`allMenssage`, (data) => {
 });
 
 //Servidor --> Cliente: El servidor envía la lista actualizada de usuarios
-socket.on(`users`, (data) => {
+socket.on("users", (data) => {
   const users = data
     .map((user) => {
       const userTemplate = `
                 <li class="clearfix">
                     <img src=${user.avatar} alt="avatar">
                     <div class="about">
-                        <div class="name"> ${user.userName}</div>
+                        <div class="name"> ${user.aliasName}</div>
                         <div class="status"> <i class="fa fa-circle online"></i> Online </div>
                     </div>
                 </li>
             `;
       return userTemplate;
     })
-    .join(``);
+    .join("");
 
   usersList.innerHTML = users;
 });
@@ -65,7 +65,7 @@ sendMessage.addEventListener("click", () => {
 });
 
 //Servidor -->cliente:
-socket.on(`message`, (data) => {
+socket.on("message", (data) => {
   const message = `
         <li class="clearfix">
         <div class="message-data text-right">

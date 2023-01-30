@@ -15,41 +15,18 @@
 
   <body>
     <div class="container">
-      <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item %>">
-                <a class="nav-link" href="/login2">Login</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-
+      <header><%- include("./partials/header", {current: `login`}) %></header>
       <main>
         <div class="jumbotron">
-          <form action="/login2" method="POST">
-            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+          <form method="POST" action="/login">
+            <h2 class="fw-bold mb-2 text-uppercase">Ingresa al chat</h2>
 
-            <p>Usuario</p>
+            <p>Alias</p>
             <div class="form-group">
               <input
                 type="text"
                 id="typeEmailX"
-                name="username"
-                class="form-control form-control-lg"
-                required
-                minlength="3"
-              />
-            </div>
-
-            <p>Pass</p>
-            <div class="form-group">
-              <input
-                type="password"
-                id="typeEmailX"
-                name="password"
+                name="aliasName"
                 class="form-control form-control-lg"
                 required
                 minlength="3"
@@ -58,8 +35,6 @@
 
             <button class="btn btn-primary" type="submit">Login</button>
           </form>
-          <br />
-          <a class="btn btn-primary" href="/signup2">Signup</a>
         </div>
       </main>
 

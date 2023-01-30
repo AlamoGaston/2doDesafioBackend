@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const dotenv = require(`dotenv`);
+dotenv.config();
 
 mongoose.set("debug", true);
 mongoose.set("strictQuery", false);
@@ -7,7 +9,7 @@ const options = {
   strictQuery: false,
 };
 
-const URL = "mongodb://127.0.0.1:27017/desafio12";
+const URL = process.env.URL_MONGO;
 
 const connection = mongoose.connect(URL, {
   useNewUrlParser: true,

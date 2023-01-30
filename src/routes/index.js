@@ -1,6 +1,10 @@
 const express = require("express");
 const cookiesRouter = require("./cookies/cookies.routes");
 const sessionRouter = require("./session/session.router");
+const dotenv = require("dotenv");
+require("dotenv").config();
+// const pageRouter = require("./pages/pages.router");
+// const authRoutes = require("./auth/auth.route");
 
 const router = express.Router();
 
@@ -16,5 +20,7 @@ router
 
   .use("/cookies", cookiesRouter)
   .use("/session", sessionRouter);
+// .use(pageRouter)
+// .use("/api/auth", authRoutes);
 
 module.exports = router;
