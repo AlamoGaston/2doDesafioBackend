@@ -1,7 +1,7 @@
 {
   "name": "desafio-16",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Consigna:",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -44,5 +44,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlamoGaston/DesafiosBackend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AlamoGaston/DesafiosBackend/issues"
+  },
+  "homepage": "https://github.com/AlamoGaston/DesafiosBackend#readme"
 }

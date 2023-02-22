@@ -15,7 +15,7 @@ class Contenedor {
         .then((_) => newMessage.save())
         .catch((err) => console.log(`Error: ${err.message}`));
     } catch (error) {
-      throw Error(`Error in save`);
+      throw Error("Error in save");
     }
   }
 
@@ -29,7 +29,7 @@ class Contenedor {
         return false;
       }
     } catch (error) {
-      throw Error(`Error in getAll`);
+      throw Error("Error in getAll");
     }
   }
 }

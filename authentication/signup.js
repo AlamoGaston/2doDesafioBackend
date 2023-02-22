@@ -1,7 +1,7 @@
 const passport = require("passport");
 
 const LocalStrategy = require("passport-local").Strategy;
-const UserModel = require("../src/utils/utils");
+const UserModel = require("../src/db/models/user");
 
 const { createHash } = require("../src/utils/utils");
 

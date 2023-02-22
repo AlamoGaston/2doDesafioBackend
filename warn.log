@@ -731,3 +731,12 @@
 [2022-08-14T11:58:32.536] [WARN] warnArchive - Estado: 404, Ruta consultada: /json/version, Metodo GET
 [2022-08-14T11:58:32.545] [WARN] warnArchive - Estado: 404, Ruta consultada: /json, Metodo GET
 [2022-08-15T21:34:27.926] [WARN] warnArchive - Estado: 404, Ruta consultada: /api/formProductos.js, Metodo GET
+[2023-02-22T13:13:40.538] [WARN] warnArchive - Estado: 404, Ruta consultada: /favicon.ico, Metodo GET
+[2023-02-22T13:29:41.457] [WARN] warnArchive - Estado: 404, Ruta consultada: /api/formProductos.js, Metodo GET
+[2023-02-22T13:43:49.528] [WARN] warnArchive - Estado: 404, Ruta consultada: /api/formProductos.js, Metodo GET
+[2023-02-22T13:45:35.762] [WARN] warnArchive - Estado: 404, Ruta consultada: /api/formProductos.js, Metodo GET
+[2023-02-22T15:36:22.167] [WARN] warnArchive - Estado: 404, Ruta consultada: /public/chat.css, Metodo GET
+[2023-02-22T15:37:34.262] [WARN] warnArchive - Estado: 404, Ruta consultada: /public/chat.css, Metodo GET
+[2023-02-22T15:38:15.020] [WARN] warnArchive - Estado: 404, Ruta consultada: /public/chat.css, Metodo GET
+[2023-02-22T15:38:17.052] [WARN] warnArchive - Estado: 404, Ruta consultada: /public/chat.css, Metodo GET
+[2023-02-22T15:38:24.253] [WARN] warnArchive - Estado: 404, Ruta consultada: /public/chat.css, Metodo GET

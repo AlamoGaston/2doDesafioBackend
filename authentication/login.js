@@ -20,7 +20,7 @@ const login = () => {
         //Configuración para obtener todo el req.
         passReqToCallback: true,
       },
-      async (req, username, password, done) => {
+      async (_req, username, password, done) => {
         try {
           const user = await UserModel.findOne({ username });
           if (!user) {

@@ -2,26 +2,14 @@ const express = require("express");
 const logger = require("morgan");
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
-require("dotenv").config();
-
-const passport = require("passport");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const mongoose = require("mongoose");
 const MessageDAOMongoDB = require("./daos/MessageDAOMongoDB");
-
-const faker = require("faker");
-
-const util = require("util");
-
-const parseArgs = require("minimist");
-
 const MongoStore = require("connect-mongo");
 
-const session = require("express-session");
-
-const { Router } = require("express");
-
-const log4js = require("./src/utils/logs");
+const passport = require("passport");
 
 const app = express();
 const httpServer = new HttpServer(app);
@@ -31,6 +19,12 @@ app.use(express.static("./public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger("tiny"));
+
+const session = require("express-session");
+
+const parseArgs = require("minimist");
+
+const log4js = require("./src/utils/logs");
 
 const login = require("./authentication/login");
 const signup = require("./authentication/signup");
@@ -42,6 +36,12 @@ app.set("view engine", "ejs");
 
 const socketIoChat = require("./src/sockets/socketChat");
 const socketIoProducts = require("./src/sockets/socketProducts");
+
+const faker = require("faker");
+
+const util = require("util");
+
+const { Router } = require("express");
 
 //------------------------------------- args ----------------------------------------//
 
@@ -99,9 +99,10 @@ app.use((req, _res, next) => {
 app.use(
   session({
     store: MongoStore.create({
-      mongoUrl: "mongodb://localhost:27017/desafio16",
+      mongoUrl: process.env.MONGO_URI || "mongodb://localhost:27017/gaston-db",
       ttl: 10,
     }),
+
     secret: "123456",
     resave: true,
     saveUninitialized: true,
@@ -192,6 +193,44 @@ app.post(
 
 //-------------------------------- -------- ----------------------------------------//
 
+// //-------------------------------- Desafio 14 ----------------------------------------//
+
+// const dotenv = require("dotenv");
+// require("dotenv").config();
+
+// const { fork } = require("child_process");
+
+// app.get("/info", (_req, res) => {
+//   const data = {
+//     directActual: process.cwd(),
+//     idProcess: process.pid,
+//     versionNode: process.version,
+//     routeEjec: process.execPath,
+//     opSys: process.platform,
+//     cantProcesadores: numCPUs,
+//     memory: JSON.stringify(process.memoryUsage().rss, null, 2),
+//   };
+//   res.render("info", data);
+// });
+
+// app.get("/api/randoms", (_req, res) => {
+//   res.render("objectRandomIN");
+// });
+
+// app.post("/api/randoms", (req, res) => {
+//   const { cantBucle } = req.body;
+//   process.env.CANT_BUCLE = cantBucle;
+
+//   const objectRandom = fork("./controller/getObjectRandom");
+//   objectRandom.on("message", (dataRandom) => {
+//     return res.send(dataRandom);
+//   });
+// });
+
+// app.get("/objectRandomOut", (_req, res) => {
+//   res.render("onjectRandomOUT");
+// });
+
 //Socket products:
 socketIoChat(io);
 
@@ -215,5 +254,3 @@ app.use((req, res, next) => {
   });
   next();
 });
-
-module.exports = httpServer;

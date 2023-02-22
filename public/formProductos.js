@@ -27,6 +27,8 @@ addProduct.addEventListener("click", () => {
 
 //Servidor --> Cliente: Envio los datos para agregar a la tabla.
 socket.on("refreshTable", (data) => {
+  console.log("data");
+  console.log(data);
   product = `
         <tr>
             <th scope="row">
