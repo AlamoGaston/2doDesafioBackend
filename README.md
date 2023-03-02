@@ -12,23 +12,24 @@
 
 ### Solución:
 
-- https://coderhouse-desafio17.herokuapp.com
+- https://github.com/AlamoGaston/DesafiosBackend/tree/Desafio-17
 
-#### CMD:
+#### Terminal Gitbash:
 
-- heroku login
-- git init
-- git remote -v
-- heroku git:remote -a coderhouse-desafio17-alamo
-- git add .
-- git commit -m "Desafio 17 - Heroku"
-- git push heroku master --> detecta que es una aplicaciones node, genera variables de entorno utilizadas en heroku, etc.
-- Disponible en: https://coderhouse-desafio17-alamo.herokuapp.com/
+-Github login
+-git init
+-git add .
+-git commit -m “Desafio-17”
+-git remote add origin “https://github.com/AlamoGaston/DesafiosBackend.git”
+-git push -u origin “rama utilizada: Desafio-17”
+si no funciona la linea de arriba
+-git push -f -u origin “rama utilizada: Desafio-17”
+
+- Disponible en: https://github.com/AlamoGaston/DesafiosBackend/tree/Desafio-17
 
 Importante:
 
 - Se debe contar con "start": "node server.js" en package.json
-
 ## Software utilizados:
 
 - VSC
