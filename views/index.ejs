@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <link rel="stylesheet" href="../../public/chat.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item %>">
+                <a class="nav-link" href="/login2">Login</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <div class="jumbotron">
+          <h1 class="display-4">
+            Desafio Nº19, DIVIDIR EN CAPAZ NUESTRO PROYECTO
+          </h1>
+          <p class="lead">En contrucción...</p>
+          <hr class="my-4" />
+          <p>
+            Dividir en capas el proyecto entregable con el que venimos
+            trabajando (entregable clase 16: loggers y profilers), agrupando
+            apropiadamente las capas de ruteo, controlador, lógica de negocio y
+            persistencia.
+          </p>
+          <p>
+            Considerar agrupar las rutas por funcionalidad, con sus
+            controladores, lógica de negocio con los casos de uso, y capa de
+            persistencia.
+          </p>
+          <p>
+            La capa de persistencia contendrá los métodos necesarios para
+            atender la interacción de la lógica de negocio con los propios
+            datos.
+          </p>
+        </div>
+      </main>
+
+      <footer><%- include('./partials/footer') %></footer>
+    </div>
+  </body>
+</html>
