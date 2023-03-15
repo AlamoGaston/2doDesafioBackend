@@ -44,7 +44,7 @@ Run the application locally
 ## Teach & tutor
 
 > <p>Comisión 32165.</p>
-> <p>Teach: Pablo Dominguez.</p>
+> <p>Teach: Teach: Andrea Lopez.</p>
 > <p>Tutor: Rodrigo Maestre.</p>
 
 ## Author
