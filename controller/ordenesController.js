@@ -1,8 +1,8 @@
-const storage = require(`../daos/index`);
+const storage = require("../daos/index");
 
 const ordenesStorage = storage().ordenes;
 
-const sendEmail = require(`../utils/nodemailerGmail`);
+const sendEmail = require("../utils/nodemailerGmail");
 const sendSMS = require("../utils/twilioSMS");
 const sendWhatsApp = require("../utils/twilioWtsp");
 
@@ -44,7 +44,7 @@ const auxEmail = async (userLog, orden) => {
 
   const mailOptions = {
     from: process.env.EMAIL,
-    to: `barlocco@hotmail.es`,
+    to: "alamolionel@live.com.ar",
     subject: `Nuevo pedido de: ${userLog.username}`,
     html: `
             <h3>Nuevo pedido!</h3>
