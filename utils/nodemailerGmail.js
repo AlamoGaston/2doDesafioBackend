@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const EMAIL = process.env.EMAIL;
-const PASS = process.env.PASS_EMAIL_API;
+const PASS = process.env.PASS;
 
 const trasport = createTransport({
   service: "gmail",

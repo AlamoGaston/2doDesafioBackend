@@ -4,7 +4,7 @@ const ordenesStorage = storage().ordenes;
 
 const sendEmail = require(`../utils/nodemailerGmail`);
 const sendSMS = require("../utils/twilioSMS");
-const sendWhatsApp = require("../utils/twilioWhatsApp");
+const sendWhatsApp = require("../utils/twilioWtsp");
 
 const createOrdenController = async (req, res) => {
   try {
