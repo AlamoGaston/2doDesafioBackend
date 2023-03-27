@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <link rel="stylesheet" href="../../public/chat.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item %>">
+                <a class="nav-link" href="/login2">Login</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <div class="jumbotron">
+          <h1 class="display-4">
+            Desafio Nº20, MEJORANADO LA ARQUITECTURA DE NUESTRA API
+          </h1>
+          <h1 class="display-4">Desafío 20</h1>
+          <p class="lead">En contrucción...</p>
+          <hr class="my-4" />
+          <p>
+            Modificar la capa de persistencia incorporando los conceptos de
+            Factory, DAO, y DTO.
+          </p>
+          <p>
+            Los DAOs deben presentar la misma interfaz hacia la lógica de
+            negocio de nuestro servidor.
+          </p>
+          <p>
+            El DAO seleccionado (por un parámetro en línea de comandos como lo
+            hicimos anteriormente) será devuelto por una Factory para que la
+            capa de negocio opere con el.
+          </p>
+          <p>
+            Cada uno de estos casos de persistencia, deberán ser implementados
+            usando el patrón singleton que impida crear nuevas instancias de
+            estos mecanismos de acceso a los datos.
+          </p>
+          <p>
+            Comprobar que si llamo a la factory dos veces, con una misma opción
+            elegida, devuelva la misma instancia.
+          </p>
+          <p>
+            Implementar el patrón Repository para la persistencia de productos y
+            mensajes.
+          </p>
+        </div>
+      </main>
+
+      <footer><%- include('./partials/footer') %></footer>
+    </div>
+  </body>
+</html>
